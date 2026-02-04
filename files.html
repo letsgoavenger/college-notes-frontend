@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Files</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Available Files</h2>
+
+<select id="filter" onchange="applyFilter()">
+  <option value="all">All</option>
+  <option value="notes">Notes</option>
+  <option value="mst">MST Papers</option>
+  <option value="end">End Semester Papers</option>
+</select>
+
+<div id="files"></div>
+
+<script>
+const p = new URLSearchParams(location.search);
+const branch = p.get("b");
+const sem = p.get("s");
+const subject = p.get("sub");
+
+let allFiles = [];
+
+fetch("https://college-notes-backend-production.up.railway.app/files")
+.then(res => res.json())
+.then(data => {
+  allFiles = data.filter(d =>
+    d.branch === branch &&
+    d.semester === sem &&
+    d.subject === subject
+  );
+  render(allFiles);
+});
+
+function render(list) {
+  const div = document.getElementById("files");
+  div.innerHTML = "";
+  list.forEach(f => {
+    div.innerHTML += `
+      <div class="card">
+        <b>${f.type.toUpperCase()}</b><br>
+        <a href="https://college-notes-backend-production.up.railway.app/uploads/${f.branch}/${f.filename}" download>
+          Download
+        </a>
+      </div>`;
+  });
+}
+
+function applyFilter() {
+  const val = document.getElementById("filter").value;
+  if (val === "all") render(allFiles);
+  else render(allFiles.filter(f => f.type === val));
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College Study Material</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Select Branch & Semester</h2>
+
+<select id="branch">
+  <option value="civil">Civil</option>
+  <option value="mechanical">Mechanical</option>
+  <option value="cse">CSE</option>
+</select>
+
+<select id="semester">
+  <option>Sem 1</option>
+  <option>Sem 2</option>
+  <option>Sem 3</option>
+  <option>Sem 4</option>
+</select>
+
+<button onclick="go()">Next</button>
+
+<script>
+function go() {
+  const b = branch.value;
+  const s = semester.value;
+  location.href = `subjects.html?b=${b}&s=${s}`;
+}
+</script>
+
+</body>
+</html>

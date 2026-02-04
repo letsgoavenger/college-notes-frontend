@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Subjects</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Subjects</h2>
+<ul id="list"></ul>
+
+<script>
+const params = new URLSearchParams(location.search);
+const branch = params.get("b");
+const sem = params.get("s");
+
+fetch("https://college-notes-backend-production.up.railway.app/files")
+.then(res => res.json())
+.then(data => {
+  const subjects = [...new Set(
+    data.filter(d => d.branch === branch && d.semester === sem)
+        .map(d => d.subject)
+  )];
+
+  const ul = document.getElementById("list");
+  subjects.forEach(sub => {
+    ul.innerHTML += `
+      <li class="card">
+        <a href="files.html?b=${branch}&s=${sem}&sub=${sub}">
+          ${sub}
+        </a>
+      </li>`;
+  });
+});
+</script>
+
+</body>
+</html>
