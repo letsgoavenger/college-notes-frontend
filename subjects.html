@@ -1,13 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Subjects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>Subjects</h2>
-<ul id="list"></ul>
+<header class="navbar">
+  <div class="nav-left">
+    🎓 <span>Study with Vp</span>
+    <small>Select Subject</small>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Available Subjects</h1>
+  <p>Select a subject to view notes and question papers</p>
+</section>
+
+<section class="features" id="subjectList">
+  <!-- Subjects load here -->
+</section>
 
 <script>
 const params = new URLSearchParams(location.search);
@@ -22,16 +38,22 @@ fetch("https://college-notes-backend-production.up.railway.app/files")
         .map(d => d.subject)
   )];
 
-  const ul = document.getElementById("list");
+  const container = document.getElementById("subjectList");
+
   subjects.forEach(sub => {
-    ul.innerHTML += `
-      <li class="card">
-        <a href="files.html?b=${branch}&s=${sem}&sub=${sub}">
-          ${sub}
-        </a>
-      </li>`;
+    container.innerHTML += `
+      <div class="feature" onclick="openFiles('${sub}')">
+        📚
+        <h4>${sub}</h4>
+        <p>View notes & question papers</p>
+      </div>
+    `;
   });
 });
+
+function openFiles(sub) {
+  location.href = `files.html?b=${branch}&s=${sem}&sub=${sub}`;
+}
 </script>
 
 </body>

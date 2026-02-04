@@ -1,32 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>College Study Material</title>
+  <meta charset="UTF-8">
+  <title>Study with Vp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>Select Branch & Semester</h2>
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-left">
+    🎓 <span>Study with Vp</span>
+    <small>Your College Study Portal</small>
+  </div>
+  <a href="admin.html" class="admin-btn">Admin</a>
+</header>
 
-<select id="branch">
-  <option value="civil">Civil</option>
-  <option value="mechanical">Mechanical</option>
-  <option value="cse">CSE</option>
-</select>
+<!-- HERO -->
+<section class="hero">
+  <h1>Access Study Materials Anytime, Anywhere</h1>
+  <p>
+    Download notes, question papers, and important resources for your semester.
+    <br>No login required – just select your branch and semester.
+  </p>
 
-<select id="semester">
-  <option>Sem 1</option>
-  <option>Sem 2</option>
-  <option>Sem 3</option>
-  <option>Sem 4</option>
-</select>
+  <!-- CARD -->
+  <div class="card">
+    <h3>Get Started</h3>
+    <p class="muted">Select your branch and semester to access study materials</p>
 
-<button onclick="go()">Next</button>
+    <label>Select Branch</label>
+    <select id="branch">
+      <option value="">Choose your branch</option>
+      <option value="civil">Civil</option>
+      <option value="mechanical">Mechanical</option>
+      <option value="cse">CSE</option>
+    </select>
+
+    <label>Select Semester</label>
+    <select id="semester">
+      <option value="">Choose your semester</option>
+      <option value="Sem 1">Sem 1</option>
+      <option value="Sem 2">Sem 2</option>
+      <option value="Sem 3">Sem 3</option>
+      <option value="Sem 4">Sem 4</option>
+    </select>
+
+    <button onclick="go()">View Study Materials</button>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="feature">
+    📘
+    <h4>Notes & PDFs</h4>
+    <p>Complete subject notes and study materials</p>
+  </div>
+
+  <div class="feature">
+    📄
+    <h4>Question Papers</h4>
+    <p>MST and End Semester previous year papers</p>
+  </div>
+
+  <div class="feature">
+    ⬇️
+    <h4>Easy Downloads</h4>
+    <p>Direct download with no registration needed</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div><b>500+</b><span>Study Materials</span></div>
+  <div><b class="purple">50+</b><span>Subjects</span></div>
+  <div><b class="green">6</b><span>Branches</span></div>
+  <div><b class="orange">10K+</b><span>Downloads</span></div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <p>Can’t find your notes? Contact us:</p>
+  <a href="tel:9991008871">📞 Vp Kamboj – 9991008871</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Made with ❤️ for students • All materials are for educational purposes only
+</footer>
 
 <script>
 function go() {
   const b = branch.value;
   const s = semester.value;
+  if (!b || !s) {
+    alert("Please select branch and semester");
+    return;
+  }
   location.href = `subjects.html?b=${b}&s=${s}`;
 }
 </script>

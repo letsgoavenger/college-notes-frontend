@@ -1,60 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Files</title>
+  <meta charset="UTF-8">
+  <title>Study Materials</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<h2>Available Files</h2>
+<header class="navbar">
+  <div class="nav-left">
+    🎓 <span>Study with Vp</span>
+    <small>Downloads</small>
+  </div>
+</header>
 
-<select id="filter" onchange="applyFilter()">
-  <option value="all">All</option>
-  <option value="notes">Notes</option>
-  <option value="mst">MST Papers</option>
-  <option value="end">End Semester Papers</option>
-</select>
+<section class="hero">
+  <h1>Study Materials</h1>
+  <p>Download notes and question papers instantly</p>
+</section>
 
-<div id="files"></div>
+<section class="features" id="fileList">
+  <!-- Files load here -->
+</section>
 
 <script>
-const p = new URLSearchParams(location.search);
-const branch = p.get("b");
-const sem = p.get("s");
-const subject = p.get("sub");
-
-let allFiles = [];
+const params = new URLSearchParams(location.search);
+const branch = params.get("b");
+const sem = params.get("s");
+const subject = params.get("sub");
 
 fetch("https://college-notes-backend-production.up.railway.app/files")
 .then(res => res.json())
 .then(data => {
-  allFiles = data.filter(d =>
-    d.branch === branch &&
-    d.semester === sem &&
-    d.subject === subject
+  const files = data.filter(f =>
+    f.branch === branch &&
+    f.semester === sem &&
+    f.subject === subject
   );
-  render(allFiles);
-});
 
-function render(list) {
-  const div = document.getElementById("files");
-  div.innerHTML = "";
-  list.forEach(f => {
-    div.innerHTML += `
-      <div class="card">
-        <b>${f.type.toUpperCase()}</b><br>
+  const container = document.getElementById("fileList");
+
+  files.forEach(f => {
+    container.innerHTML += `
+      <div class="feature">
+        ⬇️
+        <h4>${f.filename}</h4>
+        <p>${f.type.toUpperCase()}</p>
         <a href="https://college-notes-backend-production.up.railway.app/uploads/${f.branch}/${f.filename}" download>
-          Download
+          Download PDF
         </a>
-      </div>`;
+      </div>
+    `;
   });
-}
-
-function applyFilter() {
-  const val = document.getElementById("filter").value;
-  if (val === "all") render(allFiles);
-  else render(allFiles.filter(f => f.type === val));
-}
+});
 </script>
 
 </body>

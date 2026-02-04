@@ -1,98 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Upload Panel</title>
+  <title>Admin Upload</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    body {
-      font-family: Arial;
-      background: #f4f4f4;
-      padding: 30px;
-    }
-    .box {
-      max-width: 400px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      margin: auto;
-    }
-    input, select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-    }
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-  </style>
 </head>
-
 <body>
 
-<div class="box">
-  <h2>Admin Upload</h2>
-
-  <input type="password" id="password" placeholder="Admin Password">
-
-  <select id="branch">
-    <option value="civil">Civil</option>
-    <option value="mechanical">Mechanical</option>
-    <option value="cse">CSE</option>
-  </select>
-
-  <select id="semester">
-    <option>Sem 1</option>
-    <option>Sem 2</option>
-    <option>Sem 3</option>
-    <option>Sem 4</option>
-    <option>Sem 5</option>
-    <option>Sem 6</option>
-    <option>Sem 7</option>
-    <option>Sem 8</option>
-  </select>
-
-  <input type="text" id="subject" placeholder="Subject Name">
-
-  <select id="type">
-    <option value="notes">Notes</option>
-    <option value="mst">MST Paper</option>
-    <option value="end">End Semester Paper</option>
-  </select>
-
-  <input type="file" id="pdf">
-
-  <button onclick="upload()">Upload PDF</button>
-
-  <p id="msg"></p>
+<div class="header">
+  <h1>Admin Panel</h1>
 </div>
 
-<script>
-function upload() {
-  const formData = new FormData();
-
-  formData.append("password", document.getElementById("password").value);
-  formData.append("branch", document.getElementById("branch").value);
-  formData.append("semester", document.getElementById("semester").value);
-  formData.append("subject", document.getElementById("subject").value);
-  formData.append("type", document.getElementById("type").value);
-  formData.append("pdf", document.getElementById("pdf").files[0]);
-
-  fetch("https://college-notes-backend-production.up.railway.app/admin/upload", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("msg").innerText = data;
-  })
-  .catch(err => {
-    document.getElementById("msg").innerText = "Upload failed";
-  });
-}
-</script>
+<div class="container">
+  <div class="card">
+    <p>Admin upload panel (already working backend)</p>
+  </div>
+</div>
 
 </body>
 </html>
